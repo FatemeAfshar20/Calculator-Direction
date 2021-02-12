@@ -1,5 +1,6 @@
 package com.org.calculator.database.dao;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -12,21 +13,23 @@ import java.util.List;
 
 import io.reactivex.Completable;
 import io.reactivex.Flowable;
+import io.reactivex.Single;
+
 
 @Dao
 public interface DirectionDao {
     @Query("SELECT * FROM directionTable")
-    Flowable<List<DirectionModel>> getDirectionList();
+    LiveData<List<DirectionModel>> getDirectionList();
 
     @Query("SELECT * FROM directionTable WHERE id=:id")
-    Flowable<DirectionModel> getDirection(int id);
+    LiveData<DirectionModel> getDirection(int id);
 
     @Insert
-    Completable insert(DirectionModel directionModel);
+    void insert(DirectionModel directionModel);
 
     @Delete
-    Completable delete(DirectionModel directionModel);
+    void delete(DirectionModel directionModel);
 
     @Update
-    Completable update(DirectionModel directionModel);
+    void update(DirectionModel directionModel);
 }

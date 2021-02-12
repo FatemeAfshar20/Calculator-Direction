@@ -20,4 +20,9 @@
         <item name="android:padding">5dp</item>
     </style>
 
+    <style name="Widget.MaterialComponents.TextInputLayout.OutlinedBox.BoxStyleCustom" >
+        <item name="boxBackgroundColor">#CDEFCE</item>
+        <item name="android:layout_margin">8dp</item>
+    </style>
+
 </resources>

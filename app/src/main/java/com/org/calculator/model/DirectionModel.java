@@ -22,6 +22,9 @@ public class DirectionModel {
         mY = y;
     }
 
+    public DirectionModel() {
+    }
+
     public int getX() {
         return mX;
     }

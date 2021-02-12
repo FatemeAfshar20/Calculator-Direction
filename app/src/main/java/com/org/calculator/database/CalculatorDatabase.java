@@ -9,9 +9,14 @@ import androidx.room.RoomDatabase;
 import com.org.calculator.database.dao.DirectionDao;
 import com.org.calculator.model.DirectionModel;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 @Database(entities = {DirectionModel.class},version = CalculatorSchema.VERSION)
 public abstract class CalculatorDatabase extends RoomDatabase {
     private static CalculatorDatabase sInstance;
+
+    public  ExecutorService executorService= Executors.newFixedThreadPool(5);
 
     public static CalculatorDatabase getInstance(Context context) {
         if (sInstance==null)
