@@ -5,8 +5,8 @@
     <data>
 
         <variable
-            name="direction"
-            type="com.org.calculator.model.Direction" />
+            name="directionModel"
+            type="com.org.calculator.model.DirectionModel" />
     </data>
 
     <LinearLayout
@@ -34,7 +34,7 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@{direction.x}"
+            android:text="@{directionModel.x}"
             tools:text="X = 123456" />
 
         <com.google.android.material.textview.MaterialTextView
@@ -43,7 +43,7 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@{direction.y}"
+            android:text="@{directionModel.y}"
             tools:text="Y = 123456" />
 
         <com.google.android.material.checkbox.MaterialCheckBox

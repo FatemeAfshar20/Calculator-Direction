@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.org.calculator.R;
 import com.org.calculator.adapter.DirectionAdapter;
 import com.org.calculator.databinding.FragmentMainBinding;
-import com.org.calculator.model.Direction;
+import com.org.calculator.model.DirectionModel;
 
 import java.util.ArrayList;
 
@@ -50,8 +50,8 @@ public class MainFragment extends Fragment {
         return mBinding.getRoot();
     }
 
-    private void setupAdapter(ArrayList<Direction> directions) {
-        mAdapter = new DirectionAdapter(getActivity(), directions);
+    private void setupAdapter(ArrayList<DirectionModel> directionModels) {
+        mAdapter = new DirectionAdapter(getActivity(), directionModels);
         mBinding.recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mBinding.recyclerView.setAdapter(mAdapter);
     }

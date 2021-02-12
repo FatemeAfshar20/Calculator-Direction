@@ -10,17 +10,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.org.calculator.R;
 import com.org.calculator.databinding.ItemViewBinding;
-import com.org.calculator.model.Direction;
+import com.org.calculator.model.DirectionModel;
 
 import java.util.List;
 
 public class DirectionAdapter extends RecyclerView.Adapter<DirectionAdapter.Holder> {
     private Context mContext;
-    private List<Direction> mDirections;
+    private List<DirectionModel> mDirectionModels;
 
-    public DirectionAdapter(Context context, List<Direction> directions) {
+    public DirectionAdapter(Context context, List<DirectionModel> directionModels) {
         mContext = context;
-        mDirections = directions;
+        mDirectionModels = directionModels;
     }
 
     @NonNull
@@ -35,12 +35,12 @@ public class DirectionAdapter extends RecyclerView.Adapter<DirectionAdapter.Hold
 
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int position) {
-        holder.bindView(mDirections.get(position));
+        holder.bindView(mDirectionModels.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return mDirections.size();
+        return mDirectionModels.size();
     }
 
     class Holder extends RecyclerView.ViewHolder{
@@ -51,7 +51,7 @@ public class DirectionAdapter extends RecyclerView.Adapter<DirectionAdapter.Hold
              mBinding=binding;
          }
 
-         public void bindView(Direction direction){
+         public void bindView(DirectionModel directionModel){
 
          }
      }
