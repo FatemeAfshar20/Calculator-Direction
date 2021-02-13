@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="calculateModel"
+            type="com.org.calculator.model.CalculateModel" />
+        <variable
+            name="counter"
+            type="int" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:weightSum="3"
+        android:orientation="vertical">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_counter"
+            style="@style/TextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
+            android:background="#ffff00"
+            android:gravity="center_horizontal"
+            android:text='@{counter+1+"-- Calculate Result : "+calculateModel.result}'
+            android:textAlignment="center"
+            tools:text="1" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <com.google.android.material.textview.MaterialTextView
+                style="@style/TextStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text='@{"X : "+calculateModel.directionModelList.get(0).x}'
+                tools:text="X = 123456" />
+
+            <com.google.android.material.textview.MaterialTextView
+                style="@style/TextStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text='@{"Y : "+calculateModel.directionModelList.get(0).y}'
+                tools:text="X = 123456" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <com.google.android.material.textview.MaterialTextView
+                style="@style/TextStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text='@{"X : "+calculateModel.directionModelList.get(1).x}'
+                tools:text="X = 123456" />
+
+            <com.google.android.material.textview.MaterialTextView
+                style="@style/TextStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text='@{"Y : "+calculateModel.directionModelList.get(1).y}'
+                tools:text="X = 123456" />
+
+        </LinearLayout>
+    </LinearLayout>
+</layout>

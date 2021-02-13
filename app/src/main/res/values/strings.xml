@@ -6,5 +6,7 @@
     <string name="hint_input_y">Enter Y here</string>
     <string name="btn_add">Add</string>
     <string name="btn_cancel">Cancel</string>
+    <string name="btn_save">Save</string>
     <string name="successfully_add">Adding new direction successfully!</string>
+    <string name="btn_calculate">Calculate</string>
 </resources>

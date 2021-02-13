@@ -36,11 +36,11 @@ public class AddDialogViewModel extends AndroidViewModel {
     }
 
     public void afterTextChangeX(Editable editable){
-        mDirection.setX(Integer.parseInt(editable.toString()));
+        mDirection.setX(Double.parseDouble(editable.toString()));
     }
 
     public void afterTextChangeY(Editable editable){
-        mDirection.setY(Integer.parseInt(editable.toString()));
+        mDirection.setY(Double.parseDouble(editable.toString()));
     }
 
     public LiveData<String> getAddBtnEvent() {

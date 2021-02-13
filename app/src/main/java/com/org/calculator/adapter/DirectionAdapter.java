@@ -58,7 +58,7 @@ public class DirectionAdapter extends RecyclerView.Adapter<DirectionAdapter.Hold
                     mSelectedDirectionModels.remove(mDirectionModels.get(position));
                 }
 
-                mMainViewModel.getDirectionModels().addAll(mSelectedDirectionModels);
+                mMainViewModel.getListMutableLiveData().postValue(mSelectedDirectionModels);
             }
         });
     }

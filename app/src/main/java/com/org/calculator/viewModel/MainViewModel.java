@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import com.org.calculator.database.DirectionRepository;
 import com.org.calculator.model.DirectionModel;
@@ -15,8 +16,10 @@ import java.util.List;
 
 public class MainViewModel extends AndroidViewModel {
     private DirectionRepository mRepository;
+
     private CommonLiveData<String> mCommonLiveData;
 
+    private MutableLiveData<List<DirectionModel>> mListMutableLiveData =new MutableLiveData<>();
     private List<DirectionModel> mDirectionModels=new ArrayList<>();
 
     public MainViewModel(@NonNull Application application) {
@@ -29,6 +32,14 @@ public class MainViewModel extends AndroidViewModel {
         mCommonLiveData.setValue("SelectAddBtn");
     }
 
+    public void onListBtnClickListener(){
+        mCommonLiveData.setValue("SelectListBtn");
+    }
+
+    public void onCalculateBtnClickListener(){
+        mCommonLiveData.setValue("SelectCalculateBtn");
+    }
+
     public LiveData<List<DirectionModel>> getDirectionList(){
         return mRepository.getList();
     }
@@ -37,7 +48,11 @@ public class MainViewModel extends AndroidViewModel {
         return mCommonLiveData;
     }
 
-    public List<DirectionModel> getDirectionModels() {
+    public MutableLiveData<List<DirectionModel>> getListMutableLiveData() {
+        return mListMutableLiveData;
+    }
+
+     public List<DirectionModel> getDirectionModels() {
         return mDirectionModels;
     }
 

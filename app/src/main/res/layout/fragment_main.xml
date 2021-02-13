@@ -33,10 +33,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_above="@+id/btn_items"
+            android:layout_above="@+id/btn_calculates_model"
             android:layout_margin="16dp"
             android:src="@drawable/ic_calculate"
-            android:visibility="@{viewModel.directionModels.size()==0 ? View.GONE : View.VISIBLE}"
+            android:onClick="@{()->viewModel.onCalculateBtnClickListener()}"
+            android:visibility="@{viewModel.listMutableLiveData.size()==0 ? View.GONE : View.VISIBLE}"
+            app:maxImageSize="40dp"
+            />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btn_calculates_model"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_above="@+id/btn_items"
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_playlist"
+            android:onClick="@{()->viewModel.onListBtnClickListener()}"
             app:maxImageSize="40dp"
             />
 

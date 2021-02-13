@@ -1,15 +1,13 @@
 package com.org.calculator.view.fragment;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.Intent;
+import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.Nullable;
+import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -20,27 +18,24 @@ import com.org.calculator.R;
 import com.org.calculator.adapter.DirectionAdapter;
 import com.org.calculator.databinding.FragmentMainBinding;
 import com.org.calculator.model.DirectionModel;
-import com.org.calculator.utils.ProgramConstant;
 import com.org.calculator.viewModel.MainViewModel;
 
 import java.util.List;
-
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.core.Scheduler;
-import io.reactivex.schedulers.Schedulers;
 
 
 public class MainFragment extends Fragment {
     public static final String FRAGMENT_TAG = "AddDialogFragmentTag";
     public static final int REQUEST_CODE_ADD_DIRECTION = 1;
+    public static final int REQUEST_CODE_CALCULATE_DIRECTION = 2;
     private FragmentMainBinding mBinding;
     private DirectionAdapter mAdapter;
     private MainViewModel mViewModel;
 
+    private MainFragmentCallback mCallback;
+
     public MainFragment() {
         // Required empty public constructor
     }
-
 
     public static MainFragment newInstance() {
         MainFragment fragment = new MainFragment();
@@ -50,28 +45,58 @@ public class MainFragment extends Fragment {
     }
 
     @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
+        if (context instanceof MainFragmentCallback)
+            mCallback = (MainFragmentCallback) context;
+        else
+            throw new ClassCastException("At first implementation MainFragmentCallback interface");
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(MainViewModel.class);
-
-        mViewModel.getDirectionList().observe(this, new Observer<List<DirectionModel>>() {
-            @Override
-            public void onChanged(List<DirectionModel> directionModels) {
-                setupAdapter(directionModels);
-            }
-        });
-
+        mViewModel = new ViewModelProvider(getActivity()).get(MainViewModel.class);
         mViewModel.getCommonLiveData().observe(this, new Observer<String>() {
             @Override
             public void onChanged(String s) {
-                AddDirectionDialogFragment addDirectionDialogFragment =
-                        AddDirectionDialogFragment.newInstance();
+                switch (s) {
+                    case "SelectAddBtn":
+                        AddDirectionDialogFragment addDirectionDialogFragment =
+                                AddDirectionDialogFragment.newInstance();
 
-                addDirectionDialogFragment.
-                        setTargetFragment(MainFragment.this, REQUEST_CODE_ADD_DIRECTION);
+                        addDirectionDialogFragment.
+                                setTargetFragment(MainFragment.this, REQUEST_CODE_ADD_DIRECTION);
 
-                addDirectionDialogFragment.
-                        show(MainFragment.this.getParentFragmentManager(), FRAGMENT_TAG);;
+                        addDirectionDialogFragment.
+                                show(MainFragment.this.getParentFragmentManager(), FRAGMENT_TAG);
+                        break;
+                    case "SelectCalculateBtn":
+                        CalculateFragment calculateFragment =
+                                CalculateFragment.newInstance();
+
+                        calculateFragment.
+                                setTargetFragment(MainFragment.this, REQUEST_CODE_CALCULATE_DIRECTION);
+
+                        calculateFragment.
+                                show(MainFragment.this.getParentFragmentManager(), FRAGMENT_TAG);
+                        break;
+                    case "SelectListBtn":
+                        mCallback.onListBtnClickListener();
+                        break;
+                }
+            }
+        });
+
+        mViewModel.getListMutableLiveData().observe(this, new Observer<List<DirectionModel>>() {
+            @Override
+            public void onChanged(List<DirectionModel> directionModels) {
+                if (directionModels.size() >= 2) {
+                    mBinding.btnCalculate.setVisibility(View.VISIBLE);
+                    mViewModel.setDirectionModels(directionModels);
+                } else
+                    mBinding.btnCalculate.setVisibility(View.GONE);
             }
         });
     }
@@ -87,6 +112,10 @@ public class MainFragment extends Fragment {
                 container,
                 false);
         mBinding.setViewModel(mViewModel);
+
+        if (mViewModel.getDirectionModels().size()!=0)
+            setupAdapter(mViewModel.getDirectionModels());
+
         return mBinding.getRoot();
     }
 
@@ -98,4 +127,18 @@ public class MainFragment extends Fragment {
         mAdapter.setMainViewModel(mViewModel);
     }
 
+    public interface MainFragmentCallback {
+        void onListBtnClickListener();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mViewModel.getDirectionList().observe(this, new Observer<List<DirectionModel>>() {
+            @Override
+            public void onChanged(List<DirectionModel> directionModels) {
+                setupAdapter(directionModels);
+            }
+        });
+    }
 }

@@ -11,13 +11,13 @@ import com.org.calculator.database.CalculatorSchema.DirectionTable.Columns;
 public class DirectionModel {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = Columns.ID)
-    int mId;
+    private int mId;
     @ColumnInfo(name = Columns.X)
-    private int mX;
+    private double mX;
     @ColumnInfo(name = Columns.Y)
-    private int mY;
+    private double mY;
 
-    public DirectionModel(int x, int y) {
+    public DirectionModel(double x, double y) {
         mX = x;
         mY = y;
     }
@@ -25,19 +25,19 @@ public class DirectionModel {
     public DirectionModel() {
     }
 
-    public int getX() {
+    public double getX() {
         return mX;
     }
 
-    public void setX(int x) {
+    public void setX(double x) {
         mX = x;
     }
 
-    public int getY() {
+    public double getY() {
         return mY;
     }
 
-    public void setY(int y) {
+    public void setY(double y) {
         mY = y;
     }
 

@@ -10,19 +10,19 @@ import com.org.calculator.database.CalculatorSchema.CalculateTable.Columns;
 import java.util.List;
 
 @Entity(tableName = CalculatorSchema.CalculateTable.NAME)
-public class CalculateModel {
+public class CalculateModel{
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name=Columns.ID)
     private int mId;
     @ColumnInfo(name=Columns.DIRECTIONS)
     private List<DirectionModel> mDirectionModelList;
     @ColumnInfo(name=Columns.RESULT)
-    private float mResult;
+    private double mResult;
 
     public CalculateModel() {
     }
 
-    public CalculateModel(int id, List<DirectionModel> directionModelList, float result) {
+    public CalculateModel(int id, List<DirectionModel> directionModelList, double result) {
         mId = id;
         mDirectionModelList = directionModelList;
         mResult = result;
@@ -44,11 +44,11 @@ public class CalculateModel {
         mDirectionModelList = directionModelList;
     }
 
-    public float getResult() {
+    public double getResult() {
         return mResult;
     }
 
-    public void setResult(float result) {
+    public void setResult(double result) {
         mResult = result;
     }
 }
