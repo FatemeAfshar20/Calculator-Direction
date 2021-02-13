@@ -4,12 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View"/>
         <variable
             name="viewModel"
             type="com.org.calculator.viewModel.MainViewModel" />
     </data>
 
-    <FrameLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#f1f1f1f1"
@@ -19,11 +20,24 @@
             android:id="@+id/btn_items"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|right"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
             android:layout_margin="16dp"
             android:src="@drawable/ic_add"
             app:maxImageSize="50dp"
             android:onClick="@{()->viewModel.onAddBtnClickListener()}"
+            />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btn_calculate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_above="@+id/btn_items"
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_calculate"
+            android:visibility="@{viewModel.directionModels.size()==0 ? View.GONE : View.VISIBLE}"
+            app:maxImageSize="40dp"
             />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -31,5 +45,5 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:context=".view.fragment.MainFragment" />
-    </FrameLayout>
+    </RelativeLayout>
 </layout>

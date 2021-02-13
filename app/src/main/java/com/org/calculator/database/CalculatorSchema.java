@@ -13,4 +13,14 @@ public class CalculatorSchema {
             public static final String Y="y";
         }
     }
+
+    public static class CalculateTable{
+        public static final String NAME="calculateTable";
+
+        public static class Columns{
+            public static final String ID="id";
+            public static final String DIRECTIONS="x";
+            public static final String RESULT="result";
+        }
+    }
 }

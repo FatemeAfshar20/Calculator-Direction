@@ -43,10 +43,10 @@ public class AddDirectionDialogFragment extends DialogFragment {
         super.onCreate(savedInstanceState);
         mViewModel=new ViewModelProvider(this).get(AddDialogViewModel.class);
 
-        mViewModel.getAddBtnEvent().observe(this, new Observer<Boolean>() {
+        mViewModel.getAddBtnEvent().observe(this, new Observer<String>() {
             @Override
-            public void onChanged(Boolean aBoolean) {
-                if (!aBoolean) {
+            public void onChanged(String s) {
+                if (s.equals("AddingNewDirection")) {
                     dismiss();
                     sendData();
                 }

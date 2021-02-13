@@ -8,31 +8,31 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.org.calculator.R;
-import com.org.calculator.database.CalculateRepository;
+import com.org.calculator.database.DirectionRepository;
 import com.org.calculator.model.DirectionModel;
 import com.org.calculator.utils.UiUtils;
 import com.org.calculator.view.observer.CommonLiveData;
 
 public class AddDialogViewModel extends AndroidViewModel {
-    private CalculateRepository mRepository;
+    private DirectionRepository mRepository;
     private DirectionModel mDirection;
-    private CommonLiveData<Boolean> mCommonLiveData=
+    private CommonLiveData<String> mCommonLiveData=
             CommonLiveData.getInstance();
 
     public AddDialogViewModel(@NonNull Application application) {
         super(application);
-        mRepository=CalculateRepository.getInstance(application);
+        mRepository= DirectionRepository.getInstance(application);
         mDirection=new DirectionModel();
     }
 
     public void onAddBtnClickListener(){
         mRepository.insert(mDirection);
-        mCommonLiveData.setValue(false);
+        mCommonLiveData.setValue("AddingNewDirection");
         UiUtils.returnToast(getApplication(), R.string.successfully_add);
     }
 
     public void onCancelBtnClickListener(){
-        mCommonLiveData.setValue(false);
+        mCommonLiveData.setValue("AddingNewDirection");
     }
 
     public void afterTextChangeX(Editable editable){
@@ -43,7 +43,7 @@ public class AddDialogViewModel extends AndroidViewModel {
         mDirection.setY(Integer.parseInt(editable.toString()));
     }
 
-    public LiveData<Boolean> getAddBtnEvent() {
+    public LiveData<String> getAddBtnEvent() {
         return mCommonLiveData;
     }
 }

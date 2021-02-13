@@ -61,18 +61,17 @@ public class MainFragment extends Fragment {
             }
         });
 
-        mViewModel.getCommonLiveData().observe(this, new Observer<Boolean>() {
+        mViewModel.getCommonLiveData().observe(this, new Observer<String>() {
             @Override
-            public void onChanged(Boolean aBoolean) {
+            public void onChanged(String s) {
                 AddDirectionDialogFragment addDirectionDialogFragment =
                         AddDirectionDialogFragment.newInstance();
 
                 addDirectionDialogFragment.
                         setTargetFragment(MainFragment.this, REQUEST_CODE_ADD_DIRECTION);
 
-                    addDirectionDialogFragment.
-                            show(MainFragment.this.getParentFragmentManager(), FRAGMENT_TAG);;
-
+                addDirectionDialogFragment.
+                        show(MainFragment.this.getParentFragmentManager(), FRAGMENT_TAG);;
             }
         });
     }

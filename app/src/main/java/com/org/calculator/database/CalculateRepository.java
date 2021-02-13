@@ -4,24 +4,20 @@ import android.content.Context;
 
 import androidx.lifecycle.LiveData;
 
-import com.org.calculator.database.dao.DirectionDao;
-import com.org.calculator.model.DirectionModel;
+import com.org.calculator.database.dao.CalculateDao;
+import com.org.calculator.model.CalculateModel;
 
 import java.util.List;
 
-import io.reactivex.Completable;
-import io.reactivex.Single;
-import io.reactivex.rxjava3.core.Flowable;
-
-public class CalculateRepository implements IRepository<DirectionModel>{
+public class CalculateRepository implements IRepository<CalculateModel>{
     private static CalculateRepository sInstance;
-    private DirectionDao mDao;
+    private CalculateDao mDao;
     private CalculatorDatabase mDatabase;
 
+
     private CalculateRepository(Context context) {
-        mDatabase=
-                CalculatorDatabase.getInstance(context.getApplicationContext());
-        mDao=mDatabase.getDirectionDao();
+        mDatabase=CalculatorDatabase.getInstance(context.getApplicationContext());
+        mDao=mDatabase.getCalculateDao();
     }
 
     public static CalculateRepository getInstance(Context context) {
@@ -31,27 +27,27 @@ public class CalculateRepository implements IRepository<DirectionModel>{
     }
 
     @Override
-    public LiveData<DirectionModel> get(int id) {
-        return mDao.getDirection(id);
+    public LiveData<CalculateModel> get(int id) {
+        return mDao.getCalculate(id);
     }
 
     @Override
-    public LiveData<List<DirectionModel>> getList() {
-        return mDao.getDirectionList();
+    public LiveData<List<CalculateModel>> getList() {
+        return mDao.getCalculateList();
     }
 
     @Override
-    public void insert(DirectionModel directionModel) {
-        mDatabase.executorService.execute(()->mDao.insert(directionModel));
+    public void insert(CalculateModel calculateModel) {
+        mDatabase.executorService.execute(()->mDao.insert(calculateModel));
     }
 
     @Override
-    public void delete(DirectionModel directionModel) {
-        mDatabase.executorService.execute(()->mDao.delete(directionModel));
+    public void delete(CalculateModel calculateModel) {
+        mDatabase.executorService.execute(()->mDao.delete(calculateModel));
     }
 
     @Override
-    public void update(DirectionModel directionModel) {
-        mDatabase.executorService.execute(()->mDao.update(directionModel));
+    public void update(CalculateModel calculateModel) {
+        mDatabase.executorService.execute(()->mDao.update(calculateModel));
     }
 }
